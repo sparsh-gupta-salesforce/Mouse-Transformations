@@ -9,8 +9,11 @@ def call(action,x,y,flag,user):
     global center,circumeference
 
     if action==cv2.EVENT_LBUTTONDOWN:
-        center = [(x,y)]
+        center = [(x,y),(x,y)]
         cv2.circle(img,center[0],1,(0,0,255),5)
+    elif action==cv2.EVENT_MOUSEMOVE:
+        center[1]=(x,y)
+        cv2.line(img,center[0],center[1],(0,255,0),4)
     elif action==cv2.EVENT_LBUTTONUP:
         circumference = [(x,y)]
         radius = math.sqrt(math.pow(center[0][0]-circumference[0][0],2)+math.pow(center[0][1]-circumference[0][1],2))
